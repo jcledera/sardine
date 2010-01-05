@@ -37,7 +37,17 @@ Sardine sardine = SardineFactory.begin("username", "password");
 InputStream is = sardine.getInputStream("http://yourdavserver.com/adirectory/afile.jpg");
 }}}
 
-== {{{boolean putData(String url, byte[] data)}}} ==
+== {{{void delete(String url)}}} ==
+
+This uses HTTP PUT to delete a resource on a webdav server. Most likely you will want
+to pass in a username/password for this one unless the server is behind a firewall. =)
+
+{{{
+Sardine sardine = SardineFactory.begin("username", "password");
+sardine.delete("http://yourdavserver.com/adirectory/nameOfFile.jpg");
+}}}
+
+== {{{void put(String url, byte[] data)}}} ==
 
 This allows you to HTTP PUT a file up on a webdav server. Most likely you will want
 to pass in a username/password for this one unless the server is behind a firewall. =) It is also helpful to use the [http://commons.apache.org/io/ commons-io] library to read the file from disk.
@@ -45,5 +55,5 @@ to pass in a username/password for this one unless the server is behind a firewa
 {{{
 Sardine sardine = SardineFactory.begin("username", "password");
 byte[] data = FileUtils.readFileToByteArray(new File("/file/on/disk"));
-boolean result = sardine.putData("http://yourdavserver.com/adirectory/nameOfFile.jpg", data);
+sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", data);
 }}}
