@@ -13,7 +13,7 @@ There is currently only three methods, but they do everything that I need them t
 
 == {{{List<DavResource> getResources(String url)}}} ==
 
-This returns a List of DavResource objects for a directory or a single DavResource for a file on a remote dav server. The url must end with a "/" for a directory.
+This returns a List of DavResource objects for a directory or a single DavResource for a file on a remote dav server. The url must end with a "/" for a directory. This implementation filters out ".DS_Store" files.
 
 === Example ===
 {{{
