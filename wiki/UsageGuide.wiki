@@ -1,0 +1,48 @@
+#summary Usage guide for sardine.
+#labels Featured
+
+= Introduction =
+
+Sardine is a next generation webdav client for java. However, it is intended to be extremely simple and not implement the full webdav client spec. Instead, I'm just providing methods for simple use case scenarios that I have. I want the code to run as fast as possible and use the latest released Apache httpclient code.
+
+= Details =
+
+To use Sardine, you first call {{{SardineFactory.begin()}}} or if you have HTTP auth enabled on your webdav server: {{{SardineFactory.begin(username, password)}}}. This will give you an instance of the Sardine interface. Note: once you begin() with a username/password, all method calls on the Sardine interface will use that same username/password.
+
+There is currently only three methods, but they do everything that I need them to do.
+
+== {{{List<DavResource> getResources(String url)}}} ==
+
+This returns a List of DavResource objects for a directory or a single DavResource for a file on a remote dav server. The url must end with a "/" for a directory.
+
+=== Example ===
+{{{
+Sardine sardine = SardineFactory.begin();
+List<DavResource> resources = sardine.getResources("http://yourdavserver.com/adirectory/");
+for (DavResource res : resources)
+{
+     System.out.println(res); // calls the .toString() method.
+}
+}}}
+
+== {{{InputStream getInputStream(String url)}}} ==
+
+This will get an InputStream reference to a remote file. Obviously you want to point at a file and not a directory for this one.
+
+=== Example ===
+{{{
+Sardine sardine = SardineFactory.begin("username", "password");
+InputStream is = sardine.getInputStream("http://yourdavserver.com/adirectory/afile.jpg");
+}}}
+
+== {{{boolean putData(String url, byte[] data)}}} ==
+
+This allows you to HTTP PUT a file up on a webdav server. Most likely you will want
+to pass in a username/password for this one unless the server is behind a firewall. =) It is also helpful to use the [http://commons.apache.org/io/ commons-io] library to read the file from disk.
+
+=== Example ===
+{{{
+Sardine sardine = SardineFactory.begin("username", "password");
+byte[] data = FileUtils.readFileToByteArray(new File("/file/on/disk"));
+boolean result = sardine.putData("http://yourdavserver.com/adirectory/nameOfFile.jpg", data);
+}}}
