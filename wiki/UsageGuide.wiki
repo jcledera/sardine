@@ -1,11 +1,13 @@
 #summary Usage guide for sardine.
 #labels Featured
 
+<wiki:toc max_depth="2" />
+
 = Introduction =
 
 Sardine is a next generation webdav client for java. However, it is intended to be extremely simple and not implement the full webdav client spec. Instead, I'm just providing methods for simple use case scenarios that I have. I want the code to run as fast as possible and use the latest released Apache httpclient code.
 
-= Details =
+= Methods =
 
 To use Sardine, you first call {{{SardineFactory.begin()}}} or if you have HTTP auth enabled on your webdav server: {{{SardineFactory.begin(username, password)}}}. This will give you an instance of the Sardine interface. Note: once you begin() with a username/password, all method calls on the Sardine interface will use that same username/password.
 
