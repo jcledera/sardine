@@ -17,7 +17,6 @@ There is currently only three methods, but they do everything that I need them t
 
 This returns a List of [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] objects for a directory or a single [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] for a file on a remote dav server. The url must end with a "/" for a directory. This implementation filters out ".DS_Store" files.
 
-=== Example ===
 {{{
 Sardine sardine = SardineFactory.begin();
 List<DavResource> resources = sardine.getResources("http://yourdavserver.com/adirectory/");
@@ -31,7 +30,6 @@ for (DavResource res : resources)
 
 This will get an InputStream reference to a remote file. Obviously you want to point at a file and not a directory for this one.
 
-=== Example ===
 {{{
 Sardine sardine = SardineFactory.begin("username", "password");
 InputStream is = sardine.getInputStream("http://yourdavserver.com/adirectory/afile.jpg");
@@ -42,7 +40,6 @@ InputStream is = sardine.getInputStream("http://yourdavserver.com/adirectory/afi
 This allows you to HTTP PUT a file up on a webdav server. Most likely you will want
 to pass in a username/password for this one unless the server is behind a firewall. =) It is also helpful to use the [http://commons.apache.org/io/ commons-io] library to read the file from disk.
 
-=== Example ===
 {{{
 Sardine sardine = SardineFactory.begin("username", "password");
 byte[] data = FileUtils.readFileToByteArray(new File("/file/on/disk"));
