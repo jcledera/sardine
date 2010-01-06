@@ -38,6 +38,17 @@ Sardine sardine = SardineFactory.begin("username", "password");
 InputStream is = sardine.getInputStream("http://yourdavserver.com/adirectory/afile.jpg");
 }}}
 
+== {{{void put(String url, byte[] data)}}} ==
+
+This allows you to HTTP PUT a file up on a webdav server. Most likely you will want
+to pass in a username/password for this one unless the server is behind a firewall. =) It is also helpful to use the [http://commons.apache.org/io/ commons-io] library to read the file from disk.
+
+{{{
+Sardine sardine = SardineFactory.begin("username", "password");
+byte[] data = FileUtils.readFileToByteArray(new File("/file/on/disk"));
+sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", data);
+}}}
+
 == {{{void delete(String url)}}} ==
 
 This uses HTTP PUT to delete a resource on a webdav server. Most likely you will want
@@ -48,13 +59,20 @@ Sardine sardine = SardineFactory.begin("username", "password");
 sardine.delete("http://yourdavserver.com/adirectory/nameOfFile.jpg");
 }}}
 
-== {{{void put(String url, byte[] data)}}} ==
+== {{{void createDirectory(String url)}}} ==
 
-This allows you to HTTP PUT a file up on a webdav server. Most likely you will want
-to pass in a username/password for this one unless the server is behind a firewall. =) It is also helpful to use the [http://commons.apache.org/io/ commons-io] library to read the file from disk.
+This creates a directory on the remote server.
 
 {{{
 Sardine sardine = SardineFactory.begin("username", "password");
-byte[] data = FileUtils.readFileToByteArray(new File("/file/on/disk"));
-sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", data);
+sardine.createDirectory("http://yourdavserver.com/adirectory/");
+}}}
+
+== {{{void move(String sourceUrl, String destinationUrl)}}} ==
+
+This moves a file from one location to another on the remote server.
+
+{{{
+Sardine sardine = SardineFactory.begin("username", "password");
+sardine.move("http://yourdavserver.com/adirectory/file1.jpg", "http://yourdavserver.com/adirectory/file2.jpg");
 }}}
