@@ -14,7 +14,7 @@ You will need commons-logging.jar and [http://hc.apache.org/ HttpClient/HttpCore
 
 To use Sardine, you first call {{{SardineFactory.begin()}}} or if you have HTTP auth enabled on your webdav server: {{{SardineFactory.begin(username, password)}}}. This will give you an instance of the Sardine interface. Note: once you begin() with a username/password, all method calls on the Sardine interface will use that same username/password.
 
-Below is the list of methods on the Sardine interface and example of how to use them. Each of these methods throws a SardineException which you should handle. SardineException has a few methods on it that reveal detailed information about any errors which might occur and the stack traces will show any underlying IOExceptions if they exist.
+Below is the list of methods on the Sardine interface and example of how to use them. Each of these methods throws a [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/util/SardineException.html SardineException] which you should handle. [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/util/SardineException.html SardineException] has a few methods on it that reveal detailed information about any errors which might occur and the stack traces will show any underlying IOExceptions if they exist.
 
 == {{{List<DavResource> getResources(String url)}}} ==
 
