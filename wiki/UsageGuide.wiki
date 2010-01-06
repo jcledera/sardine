@@ -5,9 +5,11 @@
 
 = Introduction =
 
-Sardine is a next generation webdav client for java. However, it is intended to be extremely simple and not implement the full webdav client spec. Instead, I'm just providing methods for simple use case scenarios that I have. I want the code to run as fast as possible and use the latest released Apache httpclient code.
+Sardine is a next generation webdav client for java. It is intended to be simple to use and does not implement the full webdav client spec. Instead, the goal is to provide methods for most use case scenarios when working with a webdav server. The code needs to run as fast as possible and use the latest released Apache HttpComonents.
 
-You will need commons-logging.jar and [http://hc.apache.org/ HttpClient/HttpCore 4.0.1] in your classpath. I've included these jars for convenience in the lib directory. 
+= Dependencies =
+
+You will need [http://commons.apache.org/logging/ commons-logging.jar] and [http://hc.apache.org/ HttpClient/HttpCore 4.0.1] in your classpath. I've included these jars for convenience in the lib directory. 
 
 Java 5 does not include JAXB, but you are using Java 6 now, right? =) If not, you will need some version of JAXB 2.1.x and its dependencies (ie:  [http://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.1/jaxb-api-2.1.jar jaxb-api-2.1.jar], [http://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-impl/2.1.12/jaxb-impl-2.1.12.jar jaxb-impl-2.1.12.jar], [http://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1.jar activation-1.1.1.jar] and [http://repo1.maven.org/maven2/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar stax-api-1.0-2.jar]
 ) in your classpath as well.
