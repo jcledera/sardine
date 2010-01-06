@@ -22,6 +22,8 @@ Below is the list of methods on the Sardine interface and example of how to use 
 
 Sardine uses the HttpComponents [http://hc.apache.org/httpcomponents-client/httpclient/apidocs/org/apache/http/impl/conn/tsccm/ThreadSafeClientConnManager.html ThreadSafeClientConnManager]. This means that you can safely use an instance of Sardine in a multithreaded environment. However, be aware that the default values for [http://hc.apache.org/httpcomponents-client/httpclient/apidocs/org/apache/http/impl/conn/tsccm/ThreadSafeClientConnManager.html ThreadSafeClientConnManager] may not support enough concurrency for your environment. Therefore, it is probably safer to just call begin() each time you want to call methods on Sardine. If enough demand warrants it, I'd consider providing a way to tune these values.
 
+----
+
 == {{{List<DavResource> getResources(String url)}}} ==
 
 This returns a List of [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] objects for a directory or a single [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] for a file on a remote dav server. The url must end with a "/" for a directory. This implementation filters out ".DS_Store" files.
