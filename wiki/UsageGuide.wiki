@@ -7,7 +7,8 @@
 
 Sardine is a next generation webdav client for java. However, it is intended to be extremely simple and not implement the full webdav client spec. Instead, I'm just providing methods for simple use case scenarios that I have. I want the code to run as fast as possible and use the latest released Apache httpclient code.
 
-You will need commons-logging.jar and [http://hc.apache.org/ HttpClient/HttpCore 4.0.1] in your classpath. I've included these jars for convenience in the lib directory. Note: If you are using Java 5, you will need some version of JAXB 2.1.x and its dependencies (ie: jaxb-api-2.1.jar, jaxb-impl-2.1.12.jar, activation-1.1.1.jar and stax-api-1.0-2.jar) in your classpath as well.
+You will need commons-logging.jar and [http://hc.apache.org/ HttpClient/HttpCore 4.0.1] in your classpath. I've included these jars for convenience in the lib directory. Note: If you are using Java 5, you will need some version of JAXB 2.1.x and its dependencies (ie:  [http://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.1/jaxb-api-2.1.jar jaxb-api-2.1.jar], [http://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-impl/2.1.12/jaxb-impl-2.1.12.jar jaxb-impl-2.1.12.jar], [http://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1.jar activation-1.1.1.jar] and [http://repo1.maven.org/maven2/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar stax-api-1.0-2.jar]
+) in your classpath as well.
 
 = Methods =
 
