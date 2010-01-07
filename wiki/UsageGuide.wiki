@@ -57,6 +57,19 @@ byte[] data = FileUtils.readFileToByteArray(new File("/file/on/disk"));
 sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", data);
 }}}
 
+== {{{void put(String url, InputStream dataStream)}}} ==
+
+This allows you to HTTP PUT a file up on a webdav server. Most likely you will want
+to pass in a username/password for this one unless the server is behind a firewall. =) 
+It takes an InputStream so that you don't have to buffer the entire file into 
+memory first as a byte array.
+
+{{{
+Sardine sardine = SardineFactory.begin("username", "password");
+InputStream fis = new FileInputStream(new File("/some/file/on/disk.txt"));
+sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", fis);
+}}}
+
 == {{{void delete(String url)}}} ==
 
 This uses HTTP PUT to delete a resource on a webdav server. Most likely you will want
