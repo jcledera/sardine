@@ -24,7 +24,7 @@ Sardine uses the HttpComponents [http://hc.apache.org/httpcomponents-client/http
 
 ----
 
-== {{{List<DavResource> getResources(String url)}}} ==
+== {{{List&lt;DavResource&gt; getResources(String url)}}} ==
 
 This returns a List of [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] objects for a directory or a single [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] for a file on a remote dav server. The url must end with a "/" for a directory. This implementation filters out ".DS_Store" files.
 
