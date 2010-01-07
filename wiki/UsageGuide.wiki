@@ -78,9 +78,18 @@ sardine.createDirectory("http://yourdavserver.com/adirectory/");
 
 == {{{void move(String sourceUrl, String destinationUrl)}}} ==
 
-This moves a file from one location to another on the remote server.
+This moves a file from one location to another on the remote server. It assumes you want to overwrite all files.
 
 {{{
 Sardine sardine = SardineFactory.begin("username", "password");
 sardine.move("http://yourdavserver.com/adirectory/file1.jpg", "http://yourdavserver.com/adirectory/file2.jpg");
+}}}
+
+== {{{void copy(String sourceUrl, String destinationUrl)}}} ==
+
+This copies a file from one location to another on the remote server. It assumes you want to overwrite all files.
+
+{{{
+Sardine sardine = SardineFactory.begin("username", "password");
+sardine.copy("http://yourdavserver.com/adirectory/file1.jpg", "http://yourdavserver.com/adirectory/file2.jpg");
 }}}
