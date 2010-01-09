@@ -106,3 +106,13 @@ This copies a file from one location to another on the remote server. It assumes
 Sardine sardine = SardineFactory.begin("username", "password");
 sardine.copy("http://yourdavserver.com/adirectory/file1.jpg", "http://yourdavserver.com/adirectory/file2.jpg");
 }}}
+
+== {{{boolean exists(String url)}}} ==
+
+This uses a HTTP HEAD request to see if a file exists on the remote server.
+
+{{{
+Sardine sardine = SardineFactory.begin();
+if (sardine.exists("http://yourdavserver.com/adirectory/file1.jpg"))
+    System.out.println("got here!");
+}}}
