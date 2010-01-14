@@ -5,7 +5,7 @@
 
 = Introduction =
 
-Sardine is a next generation webdav client for java. It is intended to be simple to use and does not implement the full webdav client spec. Instead, the goal is to provide methods for most use case scenarios when working with a webdav server. The code needs to run as fast as possible and use the latest released Apache HttpComonents.
+Sardine is a next generation webdav client for java. It is intended to be simple to use and does not implement the full webdav client spec. Instead, the goal is to provide methods for most use case scenarios when working with a webdav server. The code needs to run as fast as possible and use the latest released Apache HttpComponents.
 
 = Dependencies =
 
