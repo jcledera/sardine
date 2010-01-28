@@ -16,7 +16,9 @@ Java 5 does not include JAXB, but you are using Java 6 now, right? =) If not, yo
 
 = Methods =
 
-To use Sardine, you first call {{{SardineFactory.begin()}}} or if you have HTTP auth enabled on your webdav server: {{{SardineFactory.begin(username, password)}}}. This will give you an instance of the Sardine interface. Note: once you begin() with a username/password, all method calls on the Sardine interface will use that same username/password. For SSL usage with your own certificates, you can also pass a KeyStore into the begin() methods.
+To use Sardine, you first call {{{SardineFactory.begin()}}} or if you have HTTP auth enabled on your webdav server: {{{SardineFactory.begin(username, password)}}}. This will give you an instance of the Sardine interface. Note: once you begin() with a username/password, all method calls on the Sardine interface will use that same username/password. 
+
+By default, sardine uses SSLSocketFactory.getSocketFActory() to support https requests. For customized SSL use, you can pass a [http://hc.apache.org/httpcomponents-client/httpclient/xref/org/apache/http/conn/ssl/SSLSocketFactory.html SSLSocketFactory] into the begin() methods.
 
 Below is the list of methods on the Sardine interface and example of how to use them. Each of these methods throws a [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/util/SardineException.html SardineException] which you should handle. [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/util/SardineException.html SardineException] has a few methods on it that reveal detailed information about any errors which might occur and the stack traces will show any underlying IOExceptions if they exist.
 
