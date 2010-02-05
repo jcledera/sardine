@@ -120,3 +120,6 @@ Sardine sardine = SardineFactory.begin();
 if (sardine.exists("http://yourdavserver.com/adirectory/file1.jpg"))
     System.out.println("got here!");
 }}}
+
+
+<wiki:gadget url="http://sardine.googlecode.com/svn/wiki/adsense.xml" border="0" width="468" height="60" />
