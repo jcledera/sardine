@@ -3,6 +3,8 @@
 
 <wiki:toc max_depth="2" />
 
+<wiki:gadget url="http://sardine.googlecode.com/svn/wiki/adsense.xml" border="0" width="468" height="60" />
+
 = Introduction =
 
 Sardine is a next generation webdav client for java. It is intended to be simple to use and does not implement the full webdav client spec. Instead, the goal is to provide methods for most use case scenarios when working with a webdav server. The code needs to run as fast as possible and use the latest released Apache HttpComponents.
