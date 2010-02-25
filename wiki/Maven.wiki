@@ -1,4 +1,5 @@
 #summary How to add Sardine as a dependency to a Maven-based project.
+#labels Featured
 
 == Sardine Maven repository ==
 
