@@ -1,0 +1,27 @@
+#summary How to add Sardine as a dependency to a Maven-based project.
+
+== Sardine Maven repository ==
+
+To add Sardine as a maven dependency, add the repo to your pom.
+
+{{{
+<project>
+  ...
+  <repositories>
+     <repository>
+        <id>sardine-google-svn-repo</id>
+        <snapshots> <enabled>true</enabled> </snapshots>
+        <name>Sardine maven repo at Google Code</name>
+        <url>http://sardine.googlecode.com/svn/maven/</url>
+     </repository>
+  </repositories>
+  ...
+  <dependencies>
+    <dependency>
+      <groupId>com.googlecode.sardine</groupId>
+      <artifactId>sardine</artifactId>
+      <version>80</version>
+    </dependency>
+  </dependencies>
+</project>
+}}}
