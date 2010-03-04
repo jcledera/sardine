@@ -63,13 +63,13 @@ sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", data);
 
 == {{{void put(String url, InputStream dataStream)}}} ==
 
-This allows you to HTTP PUT a file up on a webdav server. Most likely you will want
-to pass in a username/password for this one unless the server is behind a firewall. =) 
+This allows you to HTTP PUT a file up on a webdav server. 
 It takes an InputStream so that you don't have to buffer the entire file into 
-memory first as a byte array.
+memory first as a byte array. Note that due to limitations in HttpClient (repeatable streaming), you cannot use this
+method when passing in a username/password to the begin() method.
 
 {{{
-Sardine sardine = SardineFactory.begin("username", "password");
+Sardine sardine = SardineFactory.begin();
 InputStream fis = new FileInputStream(new File("/some/file/on/disk.txt"));
 sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", fis);
 }}}
