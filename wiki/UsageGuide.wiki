@@ -66,7 +66,7 @@ sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", data);
 This allows you to HTTP PUT a file up on a webdav server. 
 It takes an InputStream so that you don't have to buffer the entire file into 
 memory first as a byte array. Note that due to limitations in HttpClient (repeatable streaming), you cannot use this
-method when passing in a username/password to the begin() method. You must use the byte[] version of put() instead.
+method when passing in a username/password to the begin() method. You must use the byte[] version of put() instead. (After r80, Sardine works around this issue for Basic Auth).
 
 {{{
 Sardine sardine = SardineFactory.begin();
