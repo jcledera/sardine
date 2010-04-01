@@ -3,7 +3,7 @@
 
 = Introduction =
 
-It is nice to be able to do webdav from Ant for various reasons. So, provide a wrapper around Sardine that enables this. Note, this is only available in svn at this time.
+It is nice to be able to do webdav from Ant for various reasons. So, provide a wrapper around Sardine that enables this.
 
 = Details =
 
