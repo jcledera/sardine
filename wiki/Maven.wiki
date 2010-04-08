@@ -1,6 +1,8 @@
 #summary How to add Sardine as a dependency to a Maven-based project.
 #labels Featured
 
+*Note: Maven support is out of date. If you would like to volunteer to maintain this in a timely fashion, then please contact me.*
+
 == Sardine Maven repository ==
 
 To add Sardine as a maven dependency, add the repo to your pom.
@@ -59,6 +61,4 @@ JDK 5 does not include JAXB, so you have to include the deps when using JDK 5:
     
   </profiles>
 }}}
-
-
 
