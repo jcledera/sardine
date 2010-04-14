@@ -1,5 +1,7 @@
-#summary A simple Ant task wrapper around Sardine
 #labels Featured
+<wiki:gadget url="http://sardine.googlecode.com/svn/wiki/adsense.xml" border="0" width="468" height="60" />
+
+#summary A simple Ant task wrapper around Sardine
 
 = Introduction =
 
