@@ -22,7 +22,7 @@ To add Sardine as a maven dependency, add the repo to your pom.
     <dependency>
       <groupId>com.googlecode.sardine</groupId>
       <artifactId>sardine</artifactId>
-      <version>115</version>
+      <version>129</version>
     </dependency>
   </dependencies>
 
