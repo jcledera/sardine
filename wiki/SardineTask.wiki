@@ -13,6 +13,10 @@ Right now, Sardine features such as complicated https configuration and proxies 
 
 Nothing speaks louder to me than a good example. Basically, you just define the typedef, pass in the location of the sardine.jar, its dependencies and then call the task definitions. Username/password is optional. The exists element will set the named property to "true" on success. Put takes a fileset block and/or a file.
 
+The put() element also takes a contentType attribute.
+
+The sardine element also takes a port number.
+
 {{{
 <project name="sardineTask" basedir=".">
 
@@ -30,7 +34,7 @@ Nothing speaks louder to me than a good example. Basically, you just define the 
 	</target>
 
 	<target name="delete" depends="init">
-		<sardine username="" password="">
+		<sardine username="" password="" port="">
 			<delete url="" />
 		</sardine>
 	</target>
@@ -71,7 +75,7 @@ Nothing speaks louder to me than a good example. Basically, you just define the 
 
 	<target name="put2" depends="init">
 		<sardine username="jon" password="stevens">
-			<put url="http://www.foo.com/" file="/tmp/foo" />
+			<put url="http://www.foo.com/" file="/tmp/foo.txt" contentType="text/plain" />
 		</sardine>
 	</target>
 </project>
