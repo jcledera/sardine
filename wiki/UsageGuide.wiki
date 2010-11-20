@@ -22,7 +22,7 @@ To use Sardine, you first call {{{SardineFactory.begin()}}} or if you have HTTP 
 
 By default, Sardine uses [http://hc.apache.org/httpcomponents-client/httpclient/xref/org/apache/http/conn/ssl/SSLSocketFactory.html SSLSocketFactory.getSocketFactory()] to support https requests. For customized SSL use, you can pass a [http://hc.apache.org/httpcomponents-client/httpclient/xref/org/apache/http/conn/ssl/SSLSocketFactory.html SSLSocketFactory] into the begin() methods. For customized proxy use, you can pass a [http://hc.apache.org/httpcomponents-client/httpclient/apidocs/org/apache/http/conn/routing/class-use/HttpRoutePlanner.html HttpRoutePlanner] into the methods on SardineFactory.
 
-Sardine is also intended to be simple, so it assumes port 80 or port 443. If you need to hit a different port, then you have three options: put a proxy in front of your webdav server(s) on port 80/443, modify the source code or change the port on your webdav server(s).
+If you would like to specify a port number, just add it to the appropriate begin() method on SardineFactory. By default, it will assume port 80 (http) and 443 (https).
 
 Below is the list of methods on the Sardine interface and example of how to use them. Each of these methods throws a [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/util/SardineException.html SardineException] which you should handle. [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/util/SardineException.html SardineException] has a few methods on it that reveal detailed information about any errors which might occur and the stack traces will show any underlying IOExceptions if they exist.
 
