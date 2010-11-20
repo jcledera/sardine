@@ -52,7 +52,7 @@ Sardine sardine = SardineFactory.begin("username", "password");
 InputStream is = sardine.getInputStream("http://yourdavserver.com/adirectory/afile.jpg");
 }}}
 
-== {{{void put(String url, byte[] data)}}} ==
+== {{{void put(String url, byte[] data, [String contentType])}}} ==
 
 This allows you to HTTP PUT a file up on a webdav server. Most likely you will want
 to pass in a username/password for this one unless the server is behind a firewall. =) It is also helpful to use the [http://commons.apache.org/io/ commons-io] library to read the file from disk.
@@ -63,7 +63,9 @@ byte[] data = FileUtils.readFileToByteArray(new File("/file/on/disk"));
 sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", data);
 }}}
 
-== {{{void put(String url, InputStream dataStream)}}} ==
+Optionally, you may specify a Content-Type header value.
+
+== {{{void put(String url, InputStream dataStream, [String contentType])}}} ==
 
 This allows you to HTTP PUT a file up on a webdav server. 
 It takes an InputStream so that you don't have to buffer the entire file into 
@@ -74,6 +76,8 @@ Sardine sardine = SardineFactory.begin();
 InputStream fis = new FileInputStream(new File("/some/file/on/disk.txt"));
 sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", fis);
 }}}
+
+Optionally, you may specify a Content-Type header value.
 
 == {{{void delete(String url)}}} ==
 
