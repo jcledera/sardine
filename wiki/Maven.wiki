@@ -4,7 +4,7 @@
 
 == Sardine Maven repository ==
 
-To add Sardine as a maven dependency, add the repo to your pom.
+To add Sardine as a maven dependency, add the repo to your pom. Note, unless someone volunteers to keep this up to date, don't expect it to have the latest version.
 
 {{{
 <project>
