@@ -126,5 +126,45 @@ if (sardine.exists("http://yourdavserver.com/adirectory/file1.jpg"))
     System.out.println("got here!");
 }}}
 
+== {{{void setCustomProps(String url, Map<String,String> addProps, List<String> removeProps)}}} ==
+
+This uses a HTTP PROPPATCH request to add and/or remove custom properties on a file that exist on a remote server.
+
+{{{
+Sardine sardine = SardineFactory.begin();
+
+String someUrl = "http://yourdavserver.com/adirectory/somefile.pdf";
+
+// 1. Set custom properties on a resource:
+
+Map<String,String> addProps = new HashMap<String,String>(2);
+addProps.put("author", "J. Diamond");
+addProps.put("title", "The Third Chimpanzee");
+
+sardine.setCustomProps(someURL, addProps, null)
+
+// 2. Retrieve custom properties on a resource:
+
+List<DavResource> resources = sardine.getResources(someURL)
+
+for(DavResource resource : resources) {
+    Map<String,String> customProps = resource.getCustomProps();
+    // Use custom properties...
+    String author = (String) customProps.get("author");
+    String title = (String) customProps.get("title");
+}
+
+// 3. Update and/or delete custom properties on a resource:
+
+Map<String,String> updateProps = new HashMap<String,String>(1);
+updateProps.put("author", "Jared Diamond");
+
+List<String> removeProps = new ArrayList<String>(1);
+removeProps.add("title");
+
+sardine.setCustomProps(someURL, updateProps, removeProps)
+
+}}}
+
 
 <wiki:gadget url="http://sardine.googlecode.com/svn/wiki/adsense.xml" border="0" width="468" height="60" />
