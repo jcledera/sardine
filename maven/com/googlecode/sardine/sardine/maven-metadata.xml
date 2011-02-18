@@ -2,9 +2,10 @@
 <metadata>
   <groupId>com.googlecode.sardine</groupId>
   <artifactId>sardine</artifactId>
-  <version>129</version>
+  <version>146</version>
   <versioning>
     <versions>
+      <version>146</version>
       <version>129</version>
       <version>123</version>
       <version>115</version>
