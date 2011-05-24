@@ -16,11 +16,12 @@ You will need [http://commons.apache.org/logging/ commons-logging.jar], [http://
 Java 5 does not include JAXB, but you are using Java 6 now, right? =) If not, you will need some version of JAXB 2.1.x and its dependencies (ie:  [http://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.1/jaxb-api-2.1.jar jaxb-api-2.1.jar], [http://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-impl/2.1.12/jaxb-impl-2.1.12.jar jaxb-impl-2.1.12.jar], [http://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1.jar activation-1.1.1.jar] and [http://repo1.maven.org/maven2/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar stax-api-1.0-2.jar]
 ) in your classpath as well.
 
-= Factory =
-
+= Usage =
+== Factory ==
 To use Sardine, you first call {{{SardineFactory.begin()}}} or if you have HTTP authentication enabled on your webdav server: {{{SardineFactory.begin(username, password)}}}. This will give you an instance of the Sardine interface. Note: once you {{{begin()}}} with a username/password, all method calls on the Sardine interface will use that same credentials. 
 
-= API =
+Alternatively you can also directly instantiate the [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/impl/SardineImpl.html SardineImpl] class with the option to pass your own preconfigured [http://hc.apache.org/httpcomponents-client-ga/httpclient/apidocs/org/apache/http/client/HttpClient.html HttpClient] instance.
+
 == SSL ==
 By default, Sardine uses [http://hc.apache.org/httpcomponents-client/httpclient/xref/org/apache/http/conn/ssl/SSLSocketFactory.html SSLSocketFactory.getSocketFactory()] to support HTTPS requests. For customized SSL use, you can override a [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/impl/SardineImpl.html#createDefaultSecureSocketFactory() createDefaultSecureSocketFactory()] or provide your own configured HTTP client instance. 
 
@@ -29,8 +30,6 @@ For customized proxy use, you can pass a [http://download.oracle.com/javase/1.5.
 
 == Ports ==
 If you would like to specify a port number to connect different from port 80 (HTTP) and 443 (HTTPS), just must override [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/impl/SardineImpl.html#createDefaultSchemeRegistry() createDefaultSchemeRegistry()] or provide your own configured HTTP client instance by instantiating [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/impl/SardineImpl.html#SardineImpl(org.apache.http.impl.client.AbstractHttpClient) SardineImpl] directly.
-
-Below is the list of methods on the Sardine interface and example of how to use them. Each of these methods throw generic I/O exceptions or a [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/SardineException.html SardineException] for an unexpected server response code. [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/util/SardineException.html SardineException] has both the status code and message of the HTTP error response.
 
 == Threading ==
 Sardine uses the HttpComponents [http://hc.apache.org/httpcomponents-client/httpclient/apidocs/org/apache/http/impl/conn/tsccm/ThreadSafeClientConnManager.html ThreadSafeClientConnManager]. This means that you can safely use an instance of Sardine in a multithreaded environment. However, be aware that the default values for [http://hc.apache.org/httpcomponents-client/httpclient/apidocs/org/apache/http/impl/conn/tsccm/ThreadSafeClientConnManager.html ThreadSafeClientConnManager] may not support enough concurrency for your environment. Therefore, it is probably safer to just call begin() each time you want to call methods on Sardine. If enough demand warrants it, I'd consider providing a way to tune these values.
@@ -44,6 +43,8 @@ When enabling preemptive authentication using {{{Sardine.enablePreemptiveAuthent
 == Compression ==
 GZIP compression can be enabled using {{{Sardine.enableCompression()}}} but is currently broken ([https://issues.apache.org/jira/browse/HTTPCLIENT-1075 HTTPCLIENT-1075]). To disable the use from subsequent requests, use {{{Sardine.disableCompression}}}.
 
+== API ==
+Below is the list of methods on the Sardine interface and example of how to use them. Each of these methods throw generic I/O exceptions or a [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/SardineException.html SardineException] for an unexpected server response code. [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/util/SardineException.html SardineException] has both the status code and message of the HTTP error response.
 ----
 
 == {{{List<DavResource> getResources(String url)}}} ==
