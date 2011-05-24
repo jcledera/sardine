@@ -7,7 +7,7 @@
 
 = Introduction =
 
-Sardine is a next generation webdav client for java. It is intended to be simple to use and does not implement the full webdav client spec. Instead, the goal is to provide methods for most use case scenarios when working with a webdav server. The code needs to run as fast as possible and use the latest released Apache HttpComponents.
+Sardine is a next generation WebDAV client for Java. It is intended to be simple to use and does not implement the full WebDAV client specification. Instead, the goal is to provide methods for most use case scenarios when working with a webdav server. The code needs to run as fast as possible and use the latest released Apache [http://hc.apache.org HttpComponents].
 
 = Dependencies =
 
@@ -16,23 +16,39 @@ You will need [http://commons.apache.org/logging/ commons-logging.jar], [http://
 Java 5 does not include JAXB, but you are using Java 6 now, right? =) If not, you will need some version of JAXB 2.1.x and its dependencies (ie:  [http://repo1.maven.org/maven2/javax/xml/bind/jaxb-api/2.1/jaxb-api-2.1.jar jaxb-api-2.1.jar], [http://repo1.maven.org/maven2/com/sun/xml/bind/jaxb-impl/2.1.12/jaxb-impl-2.1.12.jar jaxb-impl-2.1.12.jar], [http://repo1.maven.org/maven2/javax/activation/activation/1.1.1/activation-1.1.1.jar activation-1.1.1.jar] and [http://repo1.maven.org/maven2/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar stax-api-1.0-2.jar]
 ) in your classpath as well.
 
-= Methods =
+= Factory =
 
-To use Sardine, you first call {{{SardineFactory.begin()}}} or if you have HTTP auth enabled on your webdav server: {{{SardineFactory.begin(username, password)}}}. This will give you an instance of the Sardine interface. Note: once you begin() with a username/password, all method calls on the Sardine interface will use that same username/password. 
+To use Sardine, you first call {{{SardineFactory.begin()}}} or if you have HTTP authentication enabled on your webdav server: {{{SardineFactory.begin(username, password)}}}. This will give you an instance of the Sardine interface. Note: once you {{{begin()}}} with a username/password, all method calls on the Sardine interface will use that same credentials. 
 
-By default, Sardine uses [http://hc.apache.org/httpcomponents-client/httpclient/xref/org/apache/http/conn/ssl/SSLSocketFactory.html SSLSocketFactory.getSocketFactory()] to support https requests. For customized SSL use, you can pass a [http://hc.apache.org/httpcomponents-client/httpclient/xref/org/apache/http/conn/ssl/SSLSocketFactory.html SSLSocketFactory] into the begin() methods. For customized proxy use, you can pass a [http://hc.apache.org/httpcomponents-client/httpclient/apidocs/org/apache/http/conn/routing/class-use/HttpRoutePlanner.html HttpRoutePlanner] into the methods on SardineFactory.
+= API =
+== SSL ==
+By default, Sardine uses [http://hc.apache.org/httpcomponents-client/httpclient/xref/org/apache/http/conn/ssl/SSLSocketFactory.html SSLSocketFactory.getSocketFactory()] to support HTTPS requests. For customized SSL use, you can override a [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/impl/SardineImpl.html#createDefaultSecureSocketFactory() createDefaultSecureSocketFactory()] or provide your own configured HTTP client instance. 
 
-If you would like to specify a port number, just add it to the appropriate begin() method on SardineFactory. By default, it will assume port 80 (http) and 443 (https).
+== Proxy ==
+For customized proxy use, you can pass a [http://download.oracle.com/javase/1.5.0/docs/api/java/net/ProxySelector.html ProxySelector] into the methods on {{{SardineFactory}}}.
 
-Below is the list of methods on the Sardine interface and example of how to use them. Each of these methods throws a [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/util/SardineException.html SardineException] which you should handle. [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/util/SardineException.html SardineException] has a few methods on it that reveal detailed information about any errors which might occur and the stack traces will show any underlying IOExceptions if they exist.
+== Ports ==
+If you would like to specify a port number to connect different from port 80 (HTTP) and 443 (HTTPS), just must override [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/impl/SardineImpl.html#createDefaultSchemeRegistry() createDefaultSchemeRegistry()] or provide your own configured HTTP client instance by instantiating [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/impl/SardineImpl.html#SardineImpl(org.apache.http.impl.client.AbstractHttpClient) SardineImpl] directly.
 
+Below is the list of methods on the Sardine interface and example of how to use them. Each of these methods throw generic I/O exceptions or a [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/SardineException.html SardineException] for an unexpected server response code. [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/util/SardineException.html SardineException] has both the status code and message of the HTTP error response.
+
+== Threading ==
 Sardine uses the HttpComponents [http://hc.apache.org/httpcomponents-client/httpclient/apidocs/org/apache/http/impl/conn/tsccm/ThreadSafeClientConnManager.html ThreadSafeClientConnManager]. This means that you can safely use an instance of Sardine in a multithreaded environment. However, be aware that the default values for [http://hc.apache.org/httpcomponents-client/httpclient/apidocs/org/apache/http/impl/conn/tsccm/ThreadSafeClientConnManager.html ThreadSafeClientConnManager] may not support enough concurrency for your environment. Therefore, it is probably safer to just call begin() each time you want to call methods on Sardine. If enough demand warrants it, I'd consider providing a way to tune these values.
+
+== Authentication ==
+When passing credentials to the client using {{{Sardine.setCredentials(String username, String password)}}}, the authentication scope is configured for {{{Basic}}}, {{{Digest}}} and {{{NTLM}}} authentication to respond to the challenge of the server.
+
+=== Preemptive Authentication ===
+When enabling preemptive authentication using {{{Sardine.enablePreemptiveAuthentication(String host)}}}, sending an authentication header before any challenge received by the server. Only the {{{Basic}}} scheme is supported and a authentication failure is thrown when the server requests a different authentication scheme such as {{{Digest}}}. To disable the use from subsequent requests, use {{{Sardine.disablePreemptiveAuthentication}}}.
+
+== Compression ==
+GZIP compression can be enabled using {{{Sardine.enableCompression()}}} but is currently broken ([https://issues.apache.org/jira/browse/HTTPCLIENT-1075 HTTPCLIENT-1075]). To disable the use from subsequent requests, use {{{Sardine.disableCompression}}}.
 
 ----
 
 == {{{List<DavResource> getResources(String url)}}} ==
 
-This returns a List of [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] objects for a directory or a single [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] for a file on a remote dav server. The url must end with a "/" for a directory. This implementation filters out ".DS_Store" files.
+This returns a List of [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] objects for a directory or a single [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] for a file on a remote dav server. The URL must end with a {{{"/"}}} for a directory. 
 
 {{{
 Sardine sardine = SardineFactory.begin();
@@ -43,13 +59,13 @@ for (DavResource res : resources)
 }
 }}}
 
-== {{{InputStream getInputStream(String url)}}} ==
+== {{{InputStream get(String url)}}} ==
 
 This will get an InputStream reference to a remote file. Obviously you want to point at a file and not a directory for this one.
 
 {{{
 Sardine sardine = SardineFactory.begin("username", "password");
-InputStream is = sardine.getInputStream("http://yourdavserver.com/adirectory/afile.jpg");
+InputStream is = sardine.get("http://yourdavserver.com/adirectory/afile.jpg");
 }}}
 
 == {{{void put(String url, byte[] data, [String contentType])}}} ==
@@ -65,11 +81,11 @@ sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", data);
 
 Optionally, you may specify a Content-Type header value.
 
-== {{{void put(String url, InputStream dataStream, [String contentType])}}} ==
+== {{{void put(String url, InputStream dataStream, [String contentType], [boolean expectContinue])}}} ==
 
 This allows you to HTTP PUT a file up on a webdav server. 
 It takes an InputStream so that you don't have to buffer the entire file into 
-memory first as a byte array. Note that due to limitations in HttpClient, basic auth is the only form of authentication that is supported.
+memory first as a byte array.
 
 {{{
 Sardine sardine = SardineFactory.begin();
@@ -77,7 +93,7 @@ InputStream fis = new FileInputStream(new File("/some/file/on/disk.txt"));
 sardine.put("http://yourdavserver.com/adirectory/nameOfFile.jpg", fis);
 }}}
 
-Optionally, you may specify a Content-Type header value.
+Optionally, you may specify a Content-Type header value. Optionally, an Expect: Continue header is added to receive a possible error by the server before any data is sent. 
 
 == {{{void delete(String url)}}} ==
 
