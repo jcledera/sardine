@@ -1,0 +1,23 @@
+#summary Changelog.
+
+= Changes =
+
+== HEAD ==
+  * Basic lock handling support
+  * Make PROPPATCH return multistatus response
+  * Allow to define custom namespace for updated properties
+
+== 253 == 
+  * Updated dependency to httpclient-4.1
+  * Added log4j dependency
+  * GZIP compression support
+  * Support for preemptive authentication for Basic scheme
+  * Option to configure and override HTTP client instance ( issue 71)
+  * Support Expect: Continue for uploads
+  * NTLM authentication scheme support
+  * Option to add custom headers to GET and PUT requests
+  * Redirect handling for PROPFIND requests (issue 74)
+  * Proxy configuration with proxy selector
+  * Checked SardineException extending HttpResponseException (issue 75)
+  * Handle URI encoding in href of resource (issue 72, issue 78)
+  * Determine if resource is directory (issue 76)
