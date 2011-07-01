@@ -3,7 +3,7 @@
 
 = Changes =
 
-== HEAD ==
+== 284 ==
   * Basic lock handling support
   * Make PROPPATCH return multistatus response
   * Allow to define custom namespace for updated properties
