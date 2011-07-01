@@ -6,6 +6,8 @@
   * Basic lock handling support
   * Make PROPPATCH return multistatus response
   * Allow to define custom namespace for updated properties
+  * Retry PUT operations on expectation failure for repeatable entities
+  * Ensure the SAX parser does not resolve entities for referenced DTDs in the response
 
 == 253 == 
   * Updated dependency to httpclient-4.1
