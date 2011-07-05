@@ -5,7 +5,7 @@ Sardine - mavenized version
 This is a maven repository of the Sardine project.
 
 To add a new version, do the following:
-**Note:** This is not a copy-paste code - edit it according to your situation.
+**Note:** This is not a copy-and-paste-ready code - edit it according to your situation.
 
   mvn install:install-file -DpomFile=sardine-pom.xml -Dpackaging=jar -DgeneratePom=true -DgroupId=com.googlecode.sardine -Dfile=sardine-XX\sardine.jar -DartifactId=sardine -Dversion=XX
 

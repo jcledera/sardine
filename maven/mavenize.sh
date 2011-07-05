@@ -1,3 +1,4 @@
+set -e
 
 VER=$1
 
@@ -6,14 +7,17 @@ if [ -z "$VER" ] ; then
   echo "   "
   echo "      svn -co https://sardine.googlecode.com/svn/maven svn-maven"
   echo "      wget http://sardine.googlecode.com/files/sardine-\$version.zip"
+  echo "      unzip -q sardine-\$version.zip"
   echo "      mavenize.sh \$version"
   echo "      # Now change the maven-metadata.xml - change <version> and add <versions>/<version>."
   echo "      gedit svn-maven/com/googlecode/sardine/sardine/maven-metadata.xml"
-  exit
+  exit 1
 fi
 
+mkdir -p sardine-$VER
 cd sardine-$VER
 
+wget http://sardine.googlecode.com/files/sardine-$VER.zip
 unzip sardine-$VER.zip -d tmp
 cd tmp/sardine-$VER
 
