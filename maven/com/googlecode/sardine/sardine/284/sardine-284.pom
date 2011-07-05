@@ -20,11 +20,11 @@
   <groupId>com.googlecode.sardine</groupId>
   <artifactId>sardine</artifactId>
   <packaging>jar</packaging>
-  <version>@VER@</version>
+  <version>284</version>
 
   <name>Sardine WebDAV client</name>
   <url>http://code.google.com/p/sardine/</url>
-  <description>An easy to use WebDAV client for Java.</description>
+  <description>An easy to use WebDAV client for Java</description>
 
   <dependencies>
     <dependency>
