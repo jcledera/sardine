@@ -3,7 +3,7 @@
 
 = Changes =
 
-== HEAD ==
+== 304 ==
   * Always set Content-Type header
   * Fix multistatus response handler for lighttpd
   * Update HTTP client dependency to 4.1.2 fixing GZIP compression
