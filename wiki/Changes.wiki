@@ -3,6 +3,13 @@
 
 = Changes =
 
+== HEAD ==
+  * Always set Content-Type header
+  * Fix multistatus response handler for lighttpd
+  * Update HTTP client dependency to 4.1.2 fixing GZIP compression
+  * Fix parsing of properties in default namespace when there are additional PROPSTAT elements with thirdparty namespace in front
+  * Fix issue 106. Using thread local for simple date formatter
+
 == 284 ==
   * Basic lock handling support
   * Make PROPPATCH return multistatus response
