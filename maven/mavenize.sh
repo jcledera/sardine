@@ -15,7 +15,7 @@ if [ -z "$VER" ] ; then
 fi
 
 if [ ! -d "com" ] ; then
-  echo "Not executed in maven/ dir - pls go there first. CWD: `pwd`"; exit 2;
+  echo "Not executed in svn-maven/ dir - pls go there first. CWD: `pwd`"; exit 2;
 fi
 
 pushd .
@@ -24,19 +24,22 @@ pushd .
       WORKDIR=`pwd`
 
       wget http://sardine.googlecode.com/files/sardine-$VER.zip
-      unzip sardine-$VER.zip -d tmp
+      unzip -q sardine-$VER.zip -d tmp
       cd tmp/sardine-$VER
 
+      # Javadoc
       cd javadoc
-         zip -r sardine-$VER-javadoc.jar *
+         zip -q -r sardine-$VER-javadoc.jar *
          mv sardine-$VER-javadoc.jar $WORKDIR
       cd ..
 
+      # Sources
       cd src
-         zip -r sardine-$VER-sources.jar *
+         zip -q -r sardine-$VER-sources.jar *
          mv sardine-$VER-sources.jar $WORKDIR
       cd ..
 
+      # Binary
       mv sardine.jar $WORKDIR/sardine-$VER.jar
 
    cd $WORKDIR/..
