@@ -7,7 +7,7 @@
 
 = Introduction =
 
-Sardine is a next generation WebDAV client for Java. It is intended to be simple to use and does not implement the full WebDAV client specification. Instead, the goal is to provide methods for most use case scenarios when working with a webdav server. The code needs to run as fast as possible and use the latest released Apache [http://hc.apache.org HttpComponents].
+Sardine is a next generation WebDAV client for Java. It is intended to be simple to use and does not implement the full WebDAV client specification (although a good amount is covered). Instead, the goal is to provide methods for most use case scenarios when working with a webdav server. The code needs to run as fast as possible and use the latest released Apache [http://hc.apache.org HttpComponents].
 
 = Dependencies =
 
@@ -49,7 +49,7 @@ Below is the list of methods on the Sardine interface and example of how to use 
 
 == {{{List<DavResource> getResources(String url)}}} ==
 
-This returns a List of [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] objects for a directory or a single [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] for a file on a remote dav server. The URL must end with a {{{"/"}}} for a directory. 
+This returns a List of [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] objects for a directory or a single [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/DavResource.html DavResource] for a file on a remote dav server. The URL should be properly encoded and must end with a {{{"/"}}} for a directory. 
 
 {{{
 Sardine sardine = SardineFactory.begin();
@@ -62,7 +62,7 @@ for (DavResource res : resources)
 
 == {{{InputStream get(String url)}}} ==
 
-This will get an InputStream reference to a remote file. Obviously you want to point at a file and not a directory for this one.
+This will get an InputStream reference to a remote file. Obviously you want to point at a file and not a directory for this one. The url should be properly encoded.
 
 {{{
 Sardine sardine = SardineFactory.begin("username", "password");
