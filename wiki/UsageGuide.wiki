@@ -25,6 +25,22 @@ Alternatively you can also directly instantiate the [http://sardine.googlecode.c
 == SSL ==
 By default, Sardine uses [http://hc.apache.org/httpcomponents-client/httpclient/xref/org/apache/http/conn/ssl/SSLSocketFactory.html SSLSocketFactory.getSocketFactory()] to support HTTPS requests. For customized SSL use, you can override a [http://sardine.googlecode.com/svn/trunk/javadoc/com/googlecode/sardine/impl/SardineImpl.html#createDefaultSecureSocketFactory() createDefaultSecureSocketFactory()] or provide your own configured HTTP client instance. 
 
+{{{
+String keyStoreFilename = "/tmp/mystore";
+File keystoreFile = new File(keyStoreFilename);
+FileInputStream fis = new FileInputStream(keystoreFile);		
+KeyStore keyStore = KeyStore.getInstance(KeyStore.getDefaultType()); // JKS
+keyStore.load(fis, null);		
+final SSLSocketFactory socketFactory = new SSLSocketFactory(keyStore);				
+	
+Sardine sardine = new SardineImpl() {
+	@Override
+	protected SSLSocketFactory createDefaultSecureSocketFactory() {
+		return socketFactory;
+	}			
+};
+}}}
+
 == Proxy ==
 For customized proxy use, you can pass a [http://download.oracle.com/javase/1.5.0/docs/api/java/net/ProxySelector.html ProxySelector] into the methods on {{{SardineFactory}}}.
 
